@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Form.module.css';
+import style from './RadioInput.module.css';
 import { FiCheck, FiInfo } from 'react-icons/fi';
 
 const RadioInput = (props) => {

@@ -1,0 +1,25 @@
+.radio__input {
+    display: none;
+}
+
+.radio__input:checked + .radio__label {
+    background: #ed8e53;
+    color: #fff;
+}
+
+.radio__label {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 15px;
+    font-size: 1em;
+    color: #000;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.radio__label:not(:last-of-type) {
+    border-right: 1px solid #000;
+}
