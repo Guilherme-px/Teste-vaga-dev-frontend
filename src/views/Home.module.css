@@ -1,0 +1,21 @@
+.home {
+    background-color: #ebebeb;
+    margin: 30px;
+    padding: 0 32px;
+}
+
+.home h1 {
+    padding: 20px 0 35px;
+    text-align: center;
+}
+
+* {
+    font-family: sans-serif;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .home {
+        margin: 0;
+        padding: 0;
+    }
+}
