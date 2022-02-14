@@ -5,6 +5,20 @@ span {
     display: block;
 }
 
+.alert label {
+    color: #e91b1b;
+}
+
+.alert input {
+    margin-bottom: 1rem;
+    margin-top: 1.2rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #e91b1b;
+     outline: none;
+    font-size: 1.2em;
+}
+
 .form__field input {
     margin-bottom: 3rem;
     margin-top: 1.2rem;
@@ -13,6 +27,12 @@ span {
     border-bottom: 1px solid #000000;
     outline: none;
     font-size: 1.2em;
+}
+
+.alert p {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #e91b1b;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {

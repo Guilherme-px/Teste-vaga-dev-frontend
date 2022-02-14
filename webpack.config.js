@@ -13,7 +13,7 @@ module.exports = {
         },
         host: '0.0.0.0',
         compress: true,
-        port: 3000,
+        port: 4000,
         liveReload: true,
     },
     resolve: {

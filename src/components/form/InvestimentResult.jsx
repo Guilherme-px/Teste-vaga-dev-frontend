@@ -5,7 +5,7 @@ const InvestimentResult = (props) => {
     return (
         <div className={style.info}>
             <h3>{props.infoTitle}</h3>
-            <span>{props.infoResult}</span>
+            <span style={props.style}>{props.infoResult}</span>
         </div>
     );
 };

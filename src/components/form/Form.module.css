@@ -59,8 +59,13 @@ button {
 }
 
 .simulate_btn {
-    background: gray;
+    background: #ed8e53;
     border: none;
+}
+
+.simulate_btn:disabled {
+    background: #808080;
+    color: #000;
 }
 
 .investiment {
