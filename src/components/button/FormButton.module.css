@@ -1,0 +1,48 @@
+.buttons {
+    display: flex;
+    column-gap: 20px;
+}
+
+button {
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    min-width: 275px;
+    max-width: 275px;
+}
+
+.clear__btn {
+    background: transparent;
+    border: 1px solid #222;
+}
+
+.simulate_btn {
+    background: #ed8e53;
+    border: none;
+}
+
+.simulate_btn:disabled {
+    background: #808080;
+    color: #000;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        min-width: 80%;
+        max-width: 80%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .buttons {
+        justify-content: center;
+    }
+}

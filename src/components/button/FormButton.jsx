@@ -1,5 +1,7 @@
 import React from 'react';
-import style from '../form/Form.module.css';
+
+// Css
+import style from './FormButton.module.css';
 
 const FormButton = (props) => {
     return (

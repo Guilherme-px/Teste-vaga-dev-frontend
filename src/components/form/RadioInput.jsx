@@ -1,6 +1,10 @@
 import React from 'react';
+
+// Css
 import style from './RadioInput.module.css';
-import { FiCheck, FiInfo } from 'react-icons/fi';
+
+// Icons
+import { FiCheck } from 'react-icons/fi';
 
 const RadioInput = (props) => {
     return (

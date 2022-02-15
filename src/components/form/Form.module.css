@@ -1,17 +1,12 @@
-.subtitle {
-    text-align: left;
-    margin-top: 8px;
-}
-
 form {
     display: flex;
     align-items: center;
     column-gap: 5rem;
 }
 
-.col {
-    display: flex;
-    flex-direction: column;
+.subtitle {
+    text-align: left;
+    margin-top: 8px;
 }
 
 .input__title {
@@ -19,6 +14,11 @@ form {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
 }
 
 .form__radio {
@@ -35,37 +35,6 @@ form {
     margin-bottom: 35px;
     min-width: 100%;
     max-width: 100%;
-}
-
-.buttons {
-    display: flex;
-    column-gap: 20px;
-}
-
-button {
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    cursor: pointer;
-    min-width: 275px;
-    max-width: 275px;
-}
-
-.clear__btn {
-    background: transparent;
-    border: 1px solid #222;
-}
-
-.simulate_btn {
-    background: #ed8e53;
-    border: none;
-}
-
-.simulate_btn:disabled {
-    background: #808080;
-    color: #000;
 }
 
 .investiment {
@@ -97,28 +66,18 @@ button {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-    .subtitle {
-        text-align: center;
-    }
-
     form {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
+    .subtitle {
+        text-align: center;
+    }
+
     form .col,
     input {
-        min-width: 80%;
-        max-width: 80%;
-    }
-
-    .buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    button {
         min-width: 80%;
         max-width: 80%;
     }
@@ -145,9 +104,5 @@ button {
     .form__content {
         max-width: 100%;
         min-width: 100%;
-    }
-
-    .buttons {
-        justify-content: center;
     }
 }

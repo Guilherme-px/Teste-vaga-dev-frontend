@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+// Icons
 import { FiInfo } from 'react-icons/fi';
 
+// Css
 import style from './Form.module.css';
 
 // Ultils
@@ -20,13 +22,12 @@ const Form = (props) => {
     const [cdi, setCdi] = useState([]);
     const [ipca, setIpca] = useState([]);
     const [simulations, setSimulations] = useState([]);
-    const initialValues = {
-        aport_inicial: '',
-        prazo: '',
-        aport_mensal: '',
-        rentabilidade: '',
-    };
-    const [values, setValues] = useState(initialValues);
+    const [values, setValues] = useState({
+        initialContribution: '',
+        term: '',
+        monthlyContribution: '',
+        profitability: '',
+    });
     const [errors, setErrors] = useState({});
 
     const changeRadioincome = (e) => {
@@ -37,7 +38,7 @@ const Form = (props) => {
         setIndexing(e.target.value);
     };
 
-    function handleChange(e) {
+    function handleOnChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
@@ -54,10 +55,10 @@ const Form = (props) => {
         const isSubmit = validate(values);
 
         if (
-            isSubmit.aport_inicial === undefined &&
-            isSubmit.prazo === undefined &&
-            isSubmit.aport_mensal === undefined &&
-            isSubmit.rentabilidade === undefined
+            isSubmit.initialContribution === undefined &&
+            isSubmit.term === undefined &&
+            isSubmit.monthlyContribution === undefined &&
+            isSubmit.profitability === undefined
         ) {
             await axios
                 .get(
@@ -71,22 +72,28 @@ const Form = (props) => {
 
     const validate = (value) => {
         const error = {};
-        const regex = /^[0-9]*$/;
+        const regex = /(?=.*\d)^(\R\$)?([0-9]*)?(.\d{3})*?(\,\d{2})?$/;
+        const regexMoney = /(?=.*\d)^(\R\$)?(([1-9]\d{0,2}(.\d{3})*)|0)?(\,\d{2})?$/;
+        const regexPercentage = /^([0-9]*)?(\%)?$/;
 
-        if (!regex.test(value.aport_inicial) || !value.aport_inicial) {
-            error.aport_inicial = 'Aporte deve ser um numero';
+        if (!regex.test(value.initialContribution) || !value.initialContribution) {
+            error.initialContribution = 'Aporte deve ser um numero';
+        } else if (!regexMoney.test(value.initialContribution)) {
+            error.initialContribution = 'Formatar como Ex: R$4.500,00';
         }
 
-        if (!regex.test(value.prazo) || !value.prazo) {
-            error.prazo = 'Prazo deve ser um numero';
+        if (!regex.test(value.term) || !value.term) {
+            error.term = 'Prazo deve ser um numero';
         }
 
-        if (!regex.test(value.aport_mensal) || !value.aport_mensal) {
-            error.aport_mensal = 'Aporte deve ser um numero';
+        if (!regex.test(value.monthlyContribution) || !value.monthlyContribution) {
+            error.monthlyContribution = 'Aporte deve ser um numero';
+        } else if (!regexMoney.test(value.monthlyContribution)) {
+            error.monthlyContribution = 'Formatar como Ex: R$4.500,00';
         }
 
-        if (!regex.test(value.rentabilidade) || !value.rentabilidade) {
-            error.rentabilidade = 'Rentabilidade deve ser um numero';
+        if (!regexPercentage.test(value.profitability) || !value.profitability) {
+            error.profitability = 'Rentabilidade deve ser um numero';
         }
 
         return error;
@@ -133,22 +140,22 @@ const Form = (props) => {
                                 />
                             </div>
                             <FormInput
-                                htmlFor='aport_inicial'
+                                htmlFor='initialContribution'
                                 labelText='Aporte Inicial'
                                 type='text'
-                                value={values.aport_inicial}
-                                name='aport_inicial'
-                                handleOnChange={handleChange}
-                                err={errors.aport_inicial}
+                                value={values.initialContribution}
+                                name='initialContribution'
+                                handleOnChange={handleOnChange}
+                                err={errors.initialContribution}
                             />
                             <FormInput
-                                htmlFor='prazo'
+                                htmlFor='term'
                                 labelText='Prazo (em meses)'
                                 type='text'
-                                value={values.prazo}
-                                name='prazo'
-                                handleOnChange={handleChange}
-                                err={errors.prazo}
+                                value={values.term}
+                                name='term'
+                                handleOnChange={handleOnChange}
+                                err={errors.term}
                             />
                             <FormInput
                                 htmlFor='ipca'
@@ -200,22 +207,22 @@ const Form = (props) => {
                                 />
                             </div>
                             <FormInput
-                                htmlFor='aport_mensal'
+                                htmlFor='monthlyContribution'
                                 labelText='Aporte Mensal'
                                 type='text'
-                                value={values.aport_mensal}
-                                name='aport_mensal'
-                                handleOnChange={handleChange}
-                                err={errors.aport_mensal}
+                                value={values.monthlyContribution}
+                                name='monthlyContribution'
+                                handleOnChange={handleOnChange}
+                                err={errors.monthlyContribution}
                             />
                             <FormInput
-                                htmlFor='rentabilidade'
-                                labelText='Rentabilidade'
+                                htmlFor='profitability'
+                                labelText='profitability'
                                 type='text'
-                                value={values.rentabilidade}
-                                name='rentabilidade'
-                                handleOnChange={handleChange}
-                                err={errors.rentabilidade}
+                                value={values.profitability}
+                                name='profitability'
+                                handleOnChange={handleOnChange}
+                                err={errors.profitability}
                             />
                             <FormInput
                                 htmlFor='cdi'
@@ -232,10 +239,10 @@ const Form = (props) => {
                     simular={getSimulation}
                     reset={clearPage}
                     disabled={
-                        !values.aport_inicial ||
-                        !values.aport_mensal ||
-                        !values.prazo ||
-                        !values.rentabilidade
+                        !values.initialContribution ||
+                        !values.monthlyContribution ||
+                        !values.term ||
+                        !values.profitability
                     }
                 />
             </div>
@@ -249,24 +256,24 @@ const Form = (props) => {
                         <div className={style.investiment__info} key={i}>
                             <InvestimentResult
                                 infoTitle='Valor final Bruto'
-                                infoResult={simulation.valorFinalBruto}
+                                infoResult={'R$ ' + simulation.valorFinalBruto}
                             />
                             <InvestimentResult
                                 infoTitle='Alíquota do IR'
-                                infoResult={simulation.aliquotaIR}
+                                infoResult={simulation.aliquotaIR + '%'}
                             />
                             <InvestimentResult
                                 infoTitle='Valor Pago em IR'
-                                infoResult={simulation.valorPagoIR}
+                                infoResult={'R$ ' + simulation.valorPagoIR}
                             />
                             <InvestimentResult
                                 infoTitle='Valor Final Líquido'
-                                infoResult={simulation.valorFinalLiquido}
+                                infoResult={'R$ ' + simulation.valorFinalLiquido}
                                 style={{ color: '#118C12' }}
                             />
                             <InvestimentResult
                                 infoTitle='Valor Total Investido'
-                                infoResult={simulation.valorTotalInvestido}
+                                infoResult={'R$ ' + simulation.valorTotalInvestido}
                             />
                             <InvestimentResult
                                 infoTitle='Ganho Líquido'
