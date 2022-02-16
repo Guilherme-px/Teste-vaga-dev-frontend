@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM node:16.13.1-alpine
 
 WORKDIR /app
 
@@ -6,14 +6,12 @@ COPY package.json ./
 
 COPY package-lock.json ./
 
-RUN apt-get update && apt-get install -y curl
+RUN npm install --silent
 
-RUN curl -sL https://deb.nodesource.com/setup_current.x | bash - && apt-get install -y nodejs
-
-RUN npm install
+RUN npm install react-scripts@5.0.0 -g --silent
 
 COPY . ./
 
-EXPOSE 3000
+EXPOSE 4000
 
 CMD ["npm", "run", "serve"]
