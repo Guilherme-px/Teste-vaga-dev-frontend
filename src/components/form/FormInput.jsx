@@ -9,8 +9,8 @@ const FormInput = (props) => {
             <div className={props.err ? style.alert : style.form__field}>
                 <label htmlFor={props.htmlFor}>{props.labelText}</label>
                 <input
+                    id={props.id}
                     type={props.type}
-                    name={props.name}
                     value={props.value}
                     onChange={props.handleOnChange}
                     readOnly={props.readOnly}

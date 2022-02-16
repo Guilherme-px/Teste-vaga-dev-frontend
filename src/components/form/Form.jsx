@@ -39,7 +39,7 @@ const Form = (props) => {
     };
 
     function handleOnChange(e) {
-        setValues({ ...values, [e.target.name]: e.target.value });
+        setValues({ ...values, [e.target.id]: e.target.value });
     }
 
     useEffect(() => {
@@ -73,10 +73,14 @@ const Form = (props) => {
     const validate = (value) => {
         const error = {};
         const regex = /(?=.*\d)^(\R\$)?([0-9]*)?(.\d{3})*?(\,\d{2})?$/;
-        const regexMoney = /(?=.*\d)^(\R\$)?(([1-9]\d{0,2}(.\d{3})*)|0)?(\,\d{2})?$/;
+        const regexMoney =
+            /(?=.*\d)^(\R\$)?(([1-9]\d{0,2}(.\d{3})*)|0)?(\,\d{2})?$/;
         const regexPercentage = /^([0-9]*)?(\%)?$/;
 
-        if (!regex.test(value.initialContribution) || !value.initialContribution) {
+        if (
+            !regex.test(value.initialContribution) ||
+            !value.initialContribution
+        ) {
             error.initialContribution = 'Aporte deve ser um numero';
         } else if (!regexMoney.test(value.initialContribution)) {
             error.initialContribution = 'Formatar como Ex: R$4.500,00';
@@ -86,13 +90,19 @@ const Form = (props) => {
             error.term = 'Prazo deve ser um numero';
         }
 
-        if (!regex.test(value.monthlyContribution) || !value.monthlyContribution) {
+        if (
+            !regex.test(value.monthlyContribution) ||
+            !value.monthlyContribution
+        ) {
             error.monthlyContribution = 'Aporte deve ser um numero';
         } else if (!regexMoney.test(value.monthlyContribution)) {
             error.monthlyContribution = 'Formatar como Ex: R$4.500,00';
         }
 
-        if (!regexPercentage.test(value.profitability) || !value.profitability) {
+        if (
+            !regexPercentage.test(value.profitability) ||
+            !value.profitability
+        ) {
             error.profitability = 'Rentabilidade deve ser um numero';
         }
 
@@ -144,7 +154,7 @@ const Form = (props) => {
                                 labelText='Aporte Inicial'
                                 type='text'
                                 value={values.initialContribution}
-                                name='initialContribution'
+                                id='initialContribution'
                                 handleOnChange={handleOnChange}
                                 err={errors.initialContribution}
                             />
@@ -153,7 +163,7 @@ const Form = (props) => {
                                 labelText='Prazo (em meses)'
                                 type='text'
                                 value={values.term}
-                                name='term'
+                                id='term'
                                 handleOnChange={handleOnChange}
                                 err={errors.term}
                             />
@@ -161,7 +171,7 @@ const Form = (props) => {
                                 htmlFor='ipca'
                                 labelText='IPCA (ao ano)'
                                 type='text'
-                                name='ipca'
+                                id='ipca'
                                 value={ipca.valor + '%' || ''}
                                 readOnly={true}
                             />
@@ -211,16 +221,16 @@ const Form = (props) => {
                                 labelText='Aporte Mensal'
                                 type='text'
                                 value={values.monthlyContribution}
-                                name='monthlyContribution'
+                                id='monthlyContribution'
                                 handleOnChange={handleOnChange}
                                 err={errors.monthlyContribution}
                             />
                             <FormInput
                                 htmlFor='profitability'
-                                labelText='profitability'
+                                labelText='Rentabilidade'
                                 type='text'
                                 value={values.profitability}
-                                name='profitability'
+                                id='profitability'
                                 handleOnChange={handleOnChange}
                                 err={errors.profitability}
                             />
@@ -228,7 +238,7 @@ const Form = (props) => {
                                 htmlFor='cdi'
                                 labelText='CDI (ao ano)'
                                 type='text'
-                                name='cdi'
+                                id='cdi'
                                 value={cdi.valor + '%' || ''}
                                 readOnly={true}
                             />
@@ -248,7 +258,7 @@ const Form = (props) => {
             </div>
 
             {simulations.length > 0 && (
-                <div className={style.investiment}>
+                <div className={style.investiment} id='simulationResult'>
                     <div className={style.subtitle}>
                         <h3>Resultado da Simulação</h3>
                     </div>
@@ -268,12 +278,16 @@ const Form = (props) => {
                             />
                             <InvestimentResult
                                 infoTitle='Valor Final Líquido'
-                                infoResult={'R$ ' + simulation.valorFinalLiquido}
+                                infoResult={
+                                    'R$ ' + simulation.valorFinalLiquido
+                                }
                                 style={{ color: '#118C12' }}
                             />
                             <InvestimentResult
                                 infoTitle='Valor Total Investido'
-                                infoResult={'R$ ' + simulation.valorTotalInvestido}
+                                infoResult={
+                                    'R$ ' + simulation.valorTotalInvestido
+                                }
                             />
                             <InvestimentResult
                                 infoTitle='Ganho Líquido'
