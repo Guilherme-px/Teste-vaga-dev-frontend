@@ -13,7 +13,6 @@ const FormButton = (props) => {
                 className={style.simulate_btn}
                 onClick={props.simular}
                 disabled={props.disabled}
-                style={props.style}
             >
                 Simular
             </button>

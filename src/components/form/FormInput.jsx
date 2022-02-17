@@ -14,7 +14,6 @@ const FormInput = (props) => {
                     value={props.value}
                     onChange={props.handleOnChange}
                     readOnly={props.readOnly}
-                    onKeyUp={props.handleOnKeyUp}
                 />
                 <p>{props.err}</p>
             </div>

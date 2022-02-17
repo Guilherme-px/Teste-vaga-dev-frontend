@@ -6,7 +6,7 @@ import { FiInfo } from 'react-icons/fi';
 // Css
 import style from './Form.module.css';
 
-// Ultils
+// Utils
 import axios from '../../utils/axios';
 
 // Components
@@ -17,31 +17,44 @@ import InvestimentResult from './InvestimentResult';
 import Container from './Container';
 
 const Form = (props) => {
+    // Recebe os valores dos grupos de input type radio
     const [income, setIncome] = useState('bruto');
     const [indexing, setIndexing] = useState('pos');
+
+    // Recebe os dados de cdi e ipca vindos da API
     const [cdi, setCdi] = useState([]);
     const [ipca, setIpca] = useState([]);
+
+    // Recebe os dados das simulações vindos da API
     const [simulations, setSimulations] = useState([]);
+
+    // Recebe os valores digitados nos inputs do formulario e inicia o estado deles vazio como padrão
     const [values, setValues] = useState({
         initialContribution: '',
         term: '',
         monthlyContribution: '',
         profitability: '',
     });
+
+    // Recebe os valores de cada erros
     const [errors, setErrors] = useState({});
 
+    // Caputra o valor selecionado no primero grupo de input radio
     const changeRadioincome = (e) => {
         setIncome(e.target.value);
     };
 
+    // Caputra o valor selecionado no segundo grupo de input radio
     const changeRadioIndexing = (e) => {
         setIndexing(e.target.value);
     };
 
+    // Captura os valores digitados nos inputs e altera o estado
     function handleOnChange(e) {
         setValues({ ...values, [e.target.id]: e.target.value });
     }
 
+    // Carrega os dados da API vindos de /indicadores e recebe os valores no estado
     useEffect(() => {
         axios.get('/indicadores').then((res) => {
             setCdi(res.data[0]);
@@ -49,6 +62,7 @@ const Form = (props) => {
         });
     }, []);
 
+    // Pega os dados de /simulacoes filtrando de acordo com o valor atual do estado dos radio selecionados
     async function getSimulation(e) {
         e.preventDefault();
         setErrors(validate(values));
@@ -70,6 +84,7 @@ const Form = (props) => {
         }
     }
 
+    // Valida os valores digitados nos inputs e envia os valores dos erros dos inputs
     const validate = (value) => {
         const error = {};
         const regex = /(?=.*\d)^(\R\$)?([0-9]*)?(.\d{3})*?(\,\d{2})?$/;
@@ -109,6 +124,7 @@ const Form = (props) => {
         return error;
     };
 
+    // Apenas recarrega a pagina para zerar o estado
     const clearPage = () => {
         window.location.reload();
     };
@@ -172,7 +188,7 @@ const Form = (props) => {
                                 labelText='IPCA (ao ano)'
                                 type='text'
                                 id='ipca'
-                                value={ipca.valor + '%' || ''}
+                                value={ipca.valor + '%'}
                                 readOnly={true}
                             />
                         </div>
@@ -239,7 +255,7 @@ const Form = (props) => {
                                 labelText='CDI (ao ano)'
                                 type='text'
                                 id='cdi'
-                                value={cdi.valor + '%' || ''}
+                                value={cdi.valor + '%'}
                                 readOnly={true}
                             />
                         </div>
