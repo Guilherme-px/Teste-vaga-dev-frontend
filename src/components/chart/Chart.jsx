@@ -1,12 +1,19 @@
 import React from 'react';
 
+// Imports chartjs
 import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+
+// hooks
 import { useState } from 'react';
 import { useEffect } from 'react';
+
+// Utils
 import axios from '../../utils/axios';
 
 const MyChart = (props) => {
+
+    // Inicia estado do componente com valores padrões para o chartjs
     const [data, setData] = useState({
         labels: [0],
         datasets: [
@@ -27,26 +34,34 @@ const MyChart = (props) => {
         ],
     });
 
+    // Requisição a API
     useEffect(() => {
         async function getChartsValues(e) {
+
+            // Arrays com valores da API
             const labelsSet = [];
             const comAporteSet = [];
             const semAporteSet = [];
+
+            // Chamada a API
             await axios
                 .get(
                     `/simulacoes?tipoIndexacao=${props.param1}&tipoRendimento=${props.param2}`
                 )
                 .then((res) => {
+                    // Pega todos os valores e cria um array com os valores
                     for (const val of Object.keys(
                         res.data[0].graficoValores.comAporte
                     )) {
                         labelsSet.push(val);
                     }
 
+                    // Converte os valores para string
                     const comAporteValues = JSON.stringify(
                         res.data[0].graficoValores.comAporte
                     );
 
+                    // Pega todos os valores e cria um array com os valores
                     JSON.parse(comAporteValues, (key, value) => {
                         comAporteSet.push(value);
                     });
@@ -59,6 +74,7 @@ const MyChart = (props) => {
                         semAporteSet.push(value);
                     });
 
+                    // Altera o estado do componente adicionando valores obitidos na API
                     setData({
                         labels: labelsSet,
                         datasets: [
@@ -80,9 +96,12 @@ const MyChart = (props) => {
                     });
                 });
         }
+
+        // Chamada da função
         getChartsValues();
     }, []);
 
+    // Estilização do chartjs
     const options = {
         responsive: true,
         plugins: {

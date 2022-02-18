@@ -4,19 +4,21 @@ Este projeto é um teste para vaga de desenvolvedor frontend júnior.
 
 ## Algumas tecnologias utilizadas nesse projeto
 
-— Biblioteca react para agilizar o desenvolvimento com as funcionalidades disponibilizadas na biblioteca.
+- **Biblioteca react** para agilizar o desenvolvimento com as funcionalidades disponibilizadas na biblioteca.
 
-- Webpack
+- **Webpack** como um recurso de boas praticas e evitar crossbrowser.
 
-- Docker
+- **Docker** para simular ambientes semelhante entre SO e manter uma padronização.
 
-- Babel
+- **Babel** como transpilador para evitar conflitos em browsers diferentes.
 
-- React testing-library e jest para desenvolvimento de testes unitários.
+- **React testing-library** e **jest** para desenvolvimento de testes unitários.
 
-- Axios para consumir a API disponibilizada para o projeto.
+- **Axios** para consumir a API disponibilizada para o projeto.
 
-- Eslint e prettier para estilizar e automatizar a edentação do código e manter a padronização.
+- **Eslint** e prettier para estilizar e automatizar a edentação do código e manter a padronização.
+
+- **Chartjs** para a criação do gráfico.
 
 ### Rodando o projeto com webpack
 
@@ -24,7 +26,11 @@ Na raiz do projeto use comando `npm run serve` como especificado em package.json
 
 ### Criando imagem com docker e rodando o projeto com container do docker
 
-Na raiz do projeto `docker build -t nomeDaSuaImagem .` para criar uma imagem docker do projeto, depois rode o comando `docker run -it -p 4000:4000 nomeDaSuaImagem` para rodar o container da aplicação em http://localhost:4000
+Na raiz do projeto use o comando `docker build -t nomeDaSuaImagem .` para criar uma imagem docker do projeto, depois rode o comando `docker run -it -p 4000:4000 nomeDaSuaImagem` para rodar o container da aplicação em http://localhost:4000
+
+### Rodando os tests
+
+Na raiz do projeto use o comando `npm run test` para rodar os testes.
 
 ### Componentes da aplicação
 
