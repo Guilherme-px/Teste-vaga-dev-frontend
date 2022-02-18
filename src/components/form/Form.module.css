@@ -52,15 +52,6 @@ form {
     column-gap: 50px;
 }
 
-.graph__column {
-    display: none;
-}
-
-.graph__column,
-.graph__bar {
-    width: 100%;
-}
-
 .investiment__info h3 {
     font-size: 0.9rem;
 }

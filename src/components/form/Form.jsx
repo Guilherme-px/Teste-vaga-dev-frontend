@@ -15,6 +15,7 @@ import FormInput from './FormInput';
 import RadioInput from './RadioInput';
 import InvestimentResult from './InvestimentResult';
 import Container from './Container';
+import MyChart from '../chart/Chart';
 
 const Form = (props) => {
     // Recebe os valores dos grupos de input type radio
@@ -312,11 +313,9 @@ const Form = (props) => {
                             />
                         </div>
                     ))}
-
                     <div className={style.graphs}>
                         <h3>Projeção de Valores</h3>
-                        <div className={style.graph__bar}></div>
-                        <div className={style.graph__column}></div>
+                        <MyChart param1={indexing} param2={income} />
                     </div>
                 </div>
             )}
